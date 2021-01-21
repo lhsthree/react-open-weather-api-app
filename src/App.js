@@ -1,24 +1,18 @@
-import logo from './logo.svg';
+import React from 'react'
+import { WeatherCard, CitySelector, WeatherList } from './components'
 import './App.css';
+import {Container} from 'react-bootstrap'
+import UseFetch from './hooks/UseFetch'
+import {API_KEY, API_BASE_URL} from './apis/config';
 
-function App() {
+const App = () => {
+const {data, error, isLoading, setUrl} = UseFetch();
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App">
+      <CitySelector onSearch={(city) => setUrl(`${API_BASE_URL}/data/2.5/forecast?q=${city}&appid=${API_KEY}`)} />
+      { data && <WeatherList weathers={data.list} /> }
+    </Container>
   );
 }
 
