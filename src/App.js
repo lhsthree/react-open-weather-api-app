@@ -15,7 +15,7 @@ const {data, error, isLoading, setUrl} = UseFetch();
   }
   return (
     <Container className="App">
-      <CitySelector onSearch={(city) => setUrl(`${API_BASE_URL}/data/2.5/forecast?q=${city}&appid=${API_KEY}`)} />
+      <CitySelector onSearch={(city) => setUrl(`${API_BASE_URL}/data/2.5/forecast?q=${city}&units=imperial&appid=${API_KEY}`)} />
       {getContent()}
     </Container>
   );
